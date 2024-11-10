@@ -20,7 +20,8 @@ class RepositoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => "{$this->owner->login}/$this->name",
+            'import_id' => $this->import_id,
+            'name' => $this->name,
             'stars' => $this->stars_count,
             'url' => $this->url,
             'description' => $this->description,

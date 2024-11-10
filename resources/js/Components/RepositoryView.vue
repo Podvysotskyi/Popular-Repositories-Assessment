@@ -56,7 +56,7 @@ defineExpose({
                                     <div class="bg-indigo-700 px-4 py-6 sm:px-6">
                                         <div class="flex items-center justify-between">
                                             <DialogTitle class="text-base font-semibold text-white">
-                                                {{ repository.name }}
+                                                {{ repository.owner }}/{{ repository.name }}
                                             </DialogTitle>
                                             <div class="ml-3 flex h-7 items-center">
                                                 <button type="button" class="relative rounded-md bg-indigo-700 text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white" @click="close">
@@ -78,6 +78,14 @@ defineExpose({
                                         <p class="mb-2">{{ repository.description }}</p>
 
                                         <dl class="divide-y divide-gray-100 border-t border-gray-100">
+                                            <div class="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                <dt class="text-sm/6 font-medium text-gray-900">ID</dt>
+                                                <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">{{ repository.import_id }}</dd>
+                                            </div>
+                                            <div class="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                                <dt class="text-sm/6 font-medium text-gray-900">Name</dt>
+                                                <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">{{ repository.name }}</dd>
+                                            </div>
                                             <div class="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                                 <dt class="text-sm/6 font-medium text-gray-900">Owner</dt>
                                                 <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">{{ repository.owner }}</dd>

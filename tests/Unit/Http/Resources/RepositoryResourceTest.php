@@ -21,7 +21,8 @@ class RepositoryResourceTest extends TestCase
 
         $this->assertEquals($resource->toArray(), [
             'id' => $repository->id,
-            'name' => "{$repository->owner->login}/$repository->name",
+            'import_id' => $repository->import_id,
+            'name' => $repository->name,
             'stars' => $repository->stars_count,
             'url' => $repository->url,
             'description' => $repository->description,
