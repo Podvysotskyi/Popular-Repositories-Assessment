@@ -28,7 +28,7 @@ Using whatever frameworks/technologies you feel most comfortable with, complete 
 │   ├── Http/ #
 │   │   ├── Controllers/  # Controllers to handle Inertia and api requests
 │   │   ├── Middleware
-│   │   │   ├── HandleInertiaRequests.php  # Middleware to handle Inertia requests for web routes
+│   │   │   └── HandleInertiaRequests.php  # Middleware to handle Inertia requests for web routes
 │   │   └── Resources/  # Resources to transform Eloquent models and the JSON responses
 │   ├── Models/ # Eloquent models
 │   ├── Providers
@@ -42,7 +42,7 @@ Using whatever frameworks/technologies you feel most comfortable with, complete 
 │   │   ├── Pages/  # Inertia pages components 
 │   │   ├── app.js  # Main script to boot Vue & Inertia application
 │   │   ├── bootstrap.js  # Script to setup axios
-│   │   ├── ssr.js  # Server entry point for server-side rendering server
+│   │   └── ssr.js  # Server entry point for server-side rendering server
 │   └── views
 │       └── app.css  # Root template that will be loaded on the first page visited to application
 ├── routes/
