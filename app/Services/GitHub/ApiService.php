@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\GitHub;
 
 use App\DataValueObjects\GitHub\RepositoryData;
 use App\DataValueObjects\GitHub\RepositoryOwnerData;
@@ -10,11 +10,13 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 
-class GitHubService
+class ApiService
 {
-    protected readonly PendingRequest $http;
+    protected PendingRequest $http;
 
-    public function __construct(array $config)
+    public function __construct(
+        array $config,
+    )
     {
         $this->http = Http::baseUrl($config['api_url']);
     }
@@ -23,10 +25,11 @@ class GitHubService
      * @throws ConnectionException
      * @throws RequestException
      */
-    public function searchRepositories(string $q,
-                                       string $sort = 'stars',
-                                       string $order = 'desc',
-                                       int    $per_page = 100
+    public function searchRepositories(
+        string $q,
+        string $sort = 'stars',
+        string $order = 'desc',
+        int    $per_page = 100,
     ): array
     {
         $response = $this->http
@@ -60,7 +63,10 @@ class GitHubService
      * @throws RequestException
      * @throws ConnectionException
      */
-    public function getRepository(string $owner, string $name): RepositoryData
+    public function getRepository(
+        string $owner,
+        string $name,
+    ): RepositoryData
     {
         $response = $this->http
             ->withHeaders([

@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string $id
+ * @property string $owner_id
  * @property int $import_id
  * @property string $name
  * @property string $url
@@ -18,14 +18,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $stars_count
  * @property Carbon $repository_created_at
  * @property Carbon $repository_pushed_at
+ * @property-read RepositoryOwner $owner
  */
 class Repository extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use HasFactory, HasUuids;
 
     protected $table = 'github_repositories';
 
     protected $fillable = [
+        'owner_id',
         'import_id',
         'name',
         'url',

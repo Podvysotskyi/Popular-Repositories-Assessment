@@ -1,27 +1,17 @@
 <?php
 
-namespace Tests\Unit\Services;
+namespace Tests\Unit\Services\GitHub;
 
-use App\Services\GitHubService;
+use App\Services\GitHub\ApiService;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
-class GitHubServiceTest extends TestCase
+class ApiServiceTest extends TestCase
 {
-    use WithFaker;
-
     private string $api_url = 'http://example.com';
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Http::preventStrayRequests();
-    }
 
     /**
      * @throws RequestException
@@ -33,15 +23,15 @@ class GitHubServiceTest extends TestCase
             'items' => [
                 [
                     'id' => 1,
-                    'name' => $this->faker->unique()->userName,
-                    'url' => $this->faker->url,
-                    'created_at' => $this->faker->date,
-                    'pushed_at' => $this->faker->date,
-                    'description' => $this->faker->text,
+                    'name' => $this->faker->unique()->userName(),
+                    'url' => $this->faker->url(),
+                    'created_at' => $this->faker->date(),
+                    'pushed_at' => $this->faker->date(),
+                    'description' => $this->faker->text(),
                     'stargazers_count' => $this->faker->numberBetween(10, 100),
                     'owner' => [
                         'id' => 1,
-                        'login' => $this->faker->unique()->userName,
+                        'login' => $this->faker->unique()->userName(),
                     ]
                 ]
             ]
@@ -51,7 +41,7 @@ class GitHubServiceTest extends TestCase
             "$this->api_url/search/repositories*" => Http::response($responseData),
         ]);
 
-        $service = new GitHubService(['api_url' => $this->api_url]);
+        $service = new ApiService(['api_url' => $this->api_url]);
         $repositories = $service->searchRepositories('test');
         $this->assertCount(count($responseData), $repositories);
 
@@ -74,16 +64,16 @@ class GitHubServiceTest extends TestCase
      */
     public function test_it_can_get_repository()
     {
-        $testOwner = $this->faker->unique()->userName;
-        $testRepository = $this->faker->unique()->userName;
+        $testOwner = $this->faker->unique()->userName();
+        $testRepository = $this->faker->unique()->userName();
 
         $responseData = [
             'id' => 1,
             'name' => $testRepository,
-            'url' => $this->faker->url,
-            'created_at' => $this->faker->date,
-            'pushed_at' => $this->faker->date,
-            'description' => $this->faker->text,
+            'url' => $this->faker->url(),
+            'created_at' => $this->faker->date(),
+            'pushed_at' => $this->faker->date(),
+            'description' => $this->faker->text(),
             'stargazers_count' => $this->faker->numberBetween(10, 100),
             'owner' => [
                 'id' => 1,
@@ -96,7 +86,7 @@ class GitHubServiceTest extends TestCase
         ]);
 
 
-        $service = new GitHubService(['api_url' => $this->api_url]);
+        $service = new ApiService(['api_url' => $this->api_url]);
         $repository = $service->getRepository($testOwner, $testRepository);
 
         $this->assertEquals($responseData['id'], $repository->id);

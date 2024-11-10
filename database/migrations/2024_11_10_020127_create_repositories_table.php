@@ -20,9 +20,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('stars_count');
             $table->timestamp('repository_created_at');
-            $table->timestamp('repository_updated_at');
+            $table->timestamp('repository_pushed_at');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

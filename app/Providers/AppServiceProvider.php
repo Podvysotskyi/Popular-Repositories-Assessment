@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\GitHubService;
+use App\Services\GitHub\ApiService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
@@ -13,8 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(GitHubService::class, function (Application $app) {
-            return new GitHubService($app['config']['services']['github']);
+        $this->app->singleton(ApiService::class, function (Application $app) {
+            return new ApiService($app['config']['services']['github']);
         });
     }
 
@@ -28,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
 
     public function provides(): array
     {
-        return [GitHubService::class];
+        return [ApiService::class];
     }
 }

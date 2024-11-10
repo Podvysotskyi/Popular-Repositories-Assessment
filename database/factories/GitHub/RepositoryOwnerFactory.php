@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class RepositoryOwnerFactory extends Factory
 {
+    protected $model = RepositoryOwner::class;
+
     /**
      * Define the model's default state.
      *
