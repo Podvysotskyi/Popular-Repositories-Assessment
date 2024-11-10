@@ -72,8 +72,13 @@ make init
   * Install all PHP dependencies
   * Build Docker containers
   * Generate Laravel application key
-  * Run migrations
   * Install all JavaScript dependencies
+
+4. Run migrations
+
+```shell
+make migrate
+```
 
 ### Start service
 
