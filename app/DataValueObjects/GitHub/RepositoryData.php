@@ -12,7 +12,7 @@ readonly class RepositoryData
         public string $url,
         public Carbon $created_at,
         public Carbon $pushed_at,
-        public string $description,
+        public ?string $description,
         public int $stargazers_count,
         public RepositoryOwnerData $owner,
     ) {}

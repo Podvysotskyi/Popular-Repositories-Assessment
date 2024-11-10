@@ -21,22 +21,24 @@ class RepositoryService
 
     public function getRepositories(): Collection
     {
-        return Repository::with(['owner'])->get();
+        return Repository::with(['owner'])
+            ->orderBy('stars_count', 'desc')
+            ->get();
     }
 
     /**
      * @throws RequestException
      * @throws ConnectionException
      */
-    public function updateRepositories(): void
+    public function updateRepositories(): Collection
     {
         // Request new repository list from GitHub API
         $repositoriesData = $this->apiService->searchRepositories('language:php');
 
-        // DB transaction to update repository list
-        DB::transaction(function () use ($repositoriesData) {
-            $repositoryIds = [];
+        $repositories = collect();
 
+        // DB transaction to update repository list
+        DB::transaction(function () use ($repositoriesData, $repositories) {
             /** @var RepositoryData $repositoryData */
             foreach ($repositoriesData as $repositoryData) {
 
@@ -56,14 +58,16 @@ class RepositoryService
                     pushed_at: $repositoryData->pushed_at,
                 );
 
-                $repositoryIds[] = $repository->id;
+                $repositories->add($repository);
             }
 
             // Delete existing repositories that are no longer in the list
             Repository::query()
-                ->whereNotIn('id', $repositoryIds)
+                ->whereNotIn('id', $repositories->pluck('id'))
                 ->delete();
         });
+
+        return $repositories;
     }
 
     /**
@@ -105,7 +109,7 @@ class RepositoryService
         int             $import_id,
         string          $name,
         string          $url,
-        string          $description,
+        ?string          $description,
         int             $stars_count,
         Carbon          $created_at,
         Carbon          $pushed_at,
