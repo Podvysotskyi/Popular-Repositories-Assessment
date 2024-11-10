@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $stars_count
  * @property Carbon $repository_created_at
  * @property Carbon $repository_pushed_at
- * @property-read RepositoryOwner $owner
+ * @property RepositoryOwner $owner
  */
 class Repository extends Model
 {
