@@ -25,8 +25,8 @@ class RepositoryResource extends JsonResource
             'url' => $this->url,
             'description' => $this->description,
             'owner' => $this->owner->login,
-            'created_at' => $this->repository_created_at,
-            'pushed_at' => $this->repository_pushed_at,
+            'created_at' => $this->repository_created_at->format('Y-m-d H:i:s'),
+            'pushed_at' => $this->repository_pushed_at->format('Y-m-d H:i:s'),
         ];
     }
 }

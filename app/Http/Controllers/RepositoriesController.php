@@ -15,7 +15,8 @@ use Inertia\Response as InertiaResponse;
 
 class RepositoriesController extends Controller
 {
-    public function __construct(protected RepositoryService $repositoryService) {
+    public function __construct(protected RepositoryService $repositoryService)
+    {
 
     }
 
@@ -36,8 +37,30 @@ class RepositoriesController extends Controller
         ]);
     }
 
-    public function show(Repository $repository): JsonResponse
+    /**
+     * @throws RequestException
+     * @throws ConnectionException
+     */
+    public function updateRepositories(): JsonResponse
     {
+        $repositories = $this->repositoryService->updateRepositories();
+
+        return Response::json(RepositoryCollectionResource::collection($repositories));
+    }
+
+    public function showRepository(Repository $repository): JsonResponse
+    {
+        return Response::json(new RepositoryResource($repository));
+    }
+
+    /**
+     * @throws RequestException
+     * @throws ConnectionException
+     */
+    public function updateRepository(Repository $repository): JsonResponse
+    {
+        $repository = $this->repositoryService->updateRepository($repository->id);
+
         return Response::json(new RepositoryResource($repository));
     }
 }

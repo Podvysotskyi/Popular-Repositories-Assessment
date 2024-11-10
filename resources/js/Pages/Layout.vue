@@ -1,11 +1,18 @@
 <script setup>
-import { Link } from '@inertiajs/vue3'
+import { Link, router } from '@inertiajs/vue3'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+import axios from 'axios'
 
 const navigation = [
     { name: 'Repositories', href: '/', current: true },
 ];
+
+const update = async () => {
+    await axios.post('/api/repositories')
+
+    router.reload()
+}
 </script>
 
 <template>
@@ -19,10 +26,8 @@ const navigation = [
                         </div>
                     </div>
                     <div class="hidden sm:ml-6 sm:flex sm:items-center">
-                        <button type="button" class="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                            <span class="absolute -inset-1.5" />
-                            <span class="sr-only">View notifications</span>
-                            <BellIcon class="h-6 w-6" aria-hidden="true" />
+                        <button type="button" class="mt-3 block rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" @click="update">
+                            Update
                         </button>
                     </div>
                     <div class="-mr-2 flex items-center sm:hidden">
@@ -41,8 +46,12 @@ const navigation = [
                 <div class="space-y-1 pb-3 pt-2">
                     <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href" :class="[item.current ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800', 'block border-l-4 py-2 pl-3 pr-4 text-base font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
                 </div>
-                <div class="border-t border-gray-200 pb-3 pt-4">
-                    <!-- Update button -->
+                <div class="border-t border-gray-200 pb-3 py-2">
+                    <div class="mx-2 grid">
+                        <button type="button" class="mt-3 block rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" @click="update">
+                            Update
+                        </button>
+                    </div>
                 </div>
             </DisclosurePanel>
         </Disclosure>

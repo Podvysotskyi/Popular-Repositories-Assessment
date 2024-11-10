@@ -46,7 +46,7 @@ class ApiService
             return new RepositoryData(
                 id: $item['id'],
                 name: $item['name'],
-                url: $item['url'],
+                url: $item['html_url'],
                 created_at: Carbon::parse($item['created_at']),
                 pushed_at: Carbon::parse($item['pushed_at']),
                 description: $item['description'],
@@ -79,7 +79,7 @@ class ApiService
         return new RepositoryData(
             id: $data['id'],
             name: $data['name'],
-            url: $data['url'],
+            url: $data['html_url'],
             created_at: Carbon::parse($data['created_at']),
             pushed_at: Carbon::parse($data['pushed_at']),
             description: $data['description'],

@@ -21,7 +21,7 @@ class RepositoryService
 
     public function getRepositories(): Collection
     {
-        return Repository::with(['owner'])
+        return Repository::query()
             ->orderBy('stars_count', 'desc')
             ->get();
     }
@@ -76,7 +76,7 @@ class RepositoryService
      */
     public function updateRepository(
         string $repositoryId,
-    ): void
+    ): Repository
     {
         $repository = Repository::with(['owner'])
             ->findOrFail($repositoryId);
@@ -92,7 +92,7 @@ class RepositoryService
             login: $repositoryData->owner->login,
         );
 
-        $this->updateOrCreateRepository(
+        return $this->updateOrCreateRepository(
             owner: $repositoryOwner,
             import_id: $repositoryData->id,
             name: $repositoryData->name,
