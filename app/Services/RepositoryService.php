@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\GitHub;
+namespace App\Services;
 
 use App\DataValueObjects\GitHub\RepositoryData;
-use App\Models\GitHub\Repository;
-use App\Models\GitHub\RepositoryOwner;
+use App\Models\Repository;
+use App\Models\RepositoryOwner;
 use Carbon\Carbon;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 class RepositoryService
 {
     public function __construct(
-        protected ApiService $apiService,
+        protected GitHubApiService $apiService,
     )
     {
     }

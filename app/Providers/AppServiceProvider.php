@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\GitHub\ApiService as GithubApiService;
+use App\Services\GitHubApiService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;

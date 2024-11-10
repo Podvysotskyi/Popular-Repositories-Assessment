@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Unit\Services\GitHub;
+namespace Tests\Unit\Services;
 
-use App\Services\GitHub\ApiService;
+use App\Services\GitHubApiService;
 use Carbon\Carbon;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
-class ApiServiceTest extends TestCase
+class GitHubApiServiceTest extends TestCase
 {
     private string $api_url = 'http://example.com';
 
@@ -41,7 +41,7 @@ class ApiServiceTest extends TestCase
             "$this->api_url/search/repositories*" => Http::response($responseData),
         ]);
 
-        $service = new ApiService(['api_url' => $this->api_url]);
+        $service = new GitHubApiService(['api_url' => $this->api_url]);
         $repositories = $service->searchRepositories('test');
         $this->assertCount(count($responseData), $repositories);
 
@@ -86,7 +86,7 @@ class ApiServiceTest extends TestCase
         ]);
 
 
-        $service = new ApiService(['api_url' => $this->api_url]);
+        $service = new GitHubApiService(['api_url' => $this->api_url]);
         $repository = $service->getRepository($testOwner, $testRepository);
 
         $this->assertEquals($responseData['id'], $repository->id);

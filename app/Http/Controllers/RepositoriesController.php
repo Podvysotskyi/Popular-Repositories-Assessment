@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\RepositoryCollectionResource;
-use App\Services\GitHub\RepositoryService;
+use App\Services\RepositoryService;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
 use Inertia\Inertia;

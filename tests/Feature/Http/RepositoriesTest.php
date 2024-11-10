@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Http;
 
-use App\Models\GitHub\Repository;
-use App\Services\GitHub\RepositoryService;
+use App\Models\Repository;
+use App\Services\RepositoryService;
 use Inertia\Testing\AssertableInertia;
 use Mockery;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;

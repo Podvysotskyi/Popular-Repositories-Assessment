@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature\Services\GitHub;
+namespace Tests\Feature\Services;
 
 use App\DataValueObjects\GitHub\RepositoryData;
 use App\DataValueObjects\GitHub\RepositoryOwnerData;
-use App\Models\GitHub\Repository;
-use App\Models\GitHub\RepositoryOwner;
-use App\Services\GitHub\ApiService;
-use App\Services\GitHub\RepositoryService;
+use App\Models\Repository;
+use App\Models\RepositoryOwner;
+use App\Services\GitHubApiService;
+use App\Services\RepositoryService;
 use Carbon\Carbon;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
@@ -16,13 +16,13 @@ use Tests\Feature\TestCase;
 
 class RepositoryServiceTest extends TestCase
 {
-    protected MockInterface|ApiService $apiService;
+    protected MockInterface|GitHubApiService $apiService;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->apiService = $this->spy(ApiService::class);
+        $this->apiService = $this->spy(GitHubApiService::class);
     }
 
     /**

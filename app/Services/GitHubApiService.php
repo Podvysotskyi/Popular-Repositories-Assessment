@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\GitHub;
+namespace App\Services;
 
 use App\DataValueObjects\GitHub\RepositoryData;
 use App\DataValueObjects\GitHub\RepositoryOwnerData;
@@ -10,7 +10,7 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 
-class ApiService
+class GitHubApiService
 {
     protected PendingRequest $http;
 

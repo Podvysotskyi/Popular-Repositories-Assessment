@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Factories\GitHub;
+namespace Database\Factories;
 
-use App\Models\GitHub\Repository;
+use App\Models\Repository;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

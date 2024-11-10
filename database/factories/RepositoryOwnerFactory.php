@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Factories\GitHub;
+namespace Database\Factories;
 
-use App\Models\GitHub\RepositoryOwner;
+use App\Models\RepositoryOwner;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
