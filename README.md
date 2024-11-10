@@ -1,66 +1,94 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Popular-Repositories-Assessment
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Popular PHP Repositories on GitHub
 
-## About Laravel
+## Assessment
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Using whatever frameworks/technologies you feel most comfortable with, complete the following:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. Using the GitHub API, retrieve the top 100 most starred public PHP projects and store the list of repositories in a MySQL table. The application must be able to create a new schema and table if they do not already exist. The table must contain the repository ID, name, owner username, URL, created date, last push date, description, and number of stars. This process should also be able to update existing project details.
+2. Using the data in the table created in step 1, create an interface that displays a list of the GitHub repositories and allows the user to click through to view details on each one. Be sure to include all of the fields in step 1 – displayed in either the list or detailed view. For the interface, you may use any UI frameworks (Vue, React, etc) you see fit.
+3. Be sure to publish your code to a public GitHub repository and make commits to show and document your process. Create a README file with a description of the architecture chosen and notes on installation of the application - and make sure to upload it to your GitHub repository.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Dependencies
 
-## Learning Laravel
+- [Laravel](https://laravel.com/docs/11.x)
+- [Sail](https://laravel.com/docs/11.x/sail)
+- [Tailwind CSS](https://tailwindcss.com)
+- [Vue](https://vuejs.org)
+- [Inertia](https://inertiajs.com)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Project structure
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```text
+./
+├── app/
+│   ├── DataValueObjects
+│   │   └── GitHub/  # Simple objects to represent GitHub API responses
+│   ├── Http/ #
+│   │   ├── Controllers/  # Controllers to handle Inertia and api requests
+│   │   ├── Middleware
+│   │   │   ├── HandleInertiaRequests.php  # Middleware to handle Inertia requests for web routes
+│   │   └── Resources/  # Resources to transform Eloquent models and the JSON responses
+│   ├── Models/ # Eloquent models
+│   ├── Providers
+│   │   └── AppServiceProvider.php  # Controls Laravel application bootstrapping. It will register application services
+│   └── Services/  # Application services. These will communicate our controllers to the models and GitHub API
+├── resources/
+│   ├── css
+│   │   └── app.css  # Main css file to specify styling for web application
+│   ├── js
+│   │   ├── Components/  # Other custom Vue components
+│   │   ├── Pages/  # Inertia pages components 
+│   │   ├── app.js  # Main script to boot Vue & Inertia application
+│   │   ├── bootstrap.js  # Script to setup axios
+│   │   ├── ssr.js  # Server entry point for server-side rendering server
+│   └── views
+│       └── app.css  # Root template that will be loaded on the first page visited to application
+├── routes/
+│   ├── api.php  # Api routes
+│   ├── console.php # Artisan console commands
+│   └── web.php  # Inertia routes
+└── ....
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Setup
 
-## Laravel Sponsors
+1. Clone the [Popular-Repositories-Assessment](https://github.com/Podvysotskyi/Popular-Repositories-Assessment) locally
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```shell
+git clone git@github.com:Podvysotskyi/Popular-Repositories-Assessment.git
+```
+2. Setup [PHP](https://www.php.net/manual/en/install.php) and [Docker](https://docs.docker.com/engine/install/) on your system
 
-### Premium Partners
+3. Run `make init` command
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```shell
+make init
+```
 
-## Contributing
+* In the background `make init` will:
+  * Create `.env` file if it doesn't exist
+  * Install all PHP dependencies
+  * Build Docker containers
+  * Generate Laravel application key
+  * Run migrations
+  * Install all JavaScript dependencies
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Start service
 
-## Code of Conduct
+```shell
+make start
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Stop service
 
-## Security Vulnerabilities
+```shell
+make stop
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Run tests
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```shell
+make test
+```
