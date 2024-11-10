@@ -109,7 +109,7 @@ class RepositoryService
         int             $import_id,
         string          $name,
         string          $url,
-        ?string          $description,
+        ?string         $description,
         int             $stars_count,
         Carbon          $created_at,
         Carbon          $pushed_at,
