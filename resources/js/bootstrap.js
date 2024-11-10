@@ -1,5 +1,5 @@
 import axios from 'axios';
-import NProgress from 'nprogress'
+import NProgress from 'nprogress';
 
 window.axios = axios;
 

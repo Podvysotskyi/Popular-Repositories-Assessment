@@ -3,7 +3,6 @@ import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } fro
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 
 import axios from 'axios'
-import NProgress from 'nprogress'
 import { ref } from 'vue'
 
 const isOpen = ref(false)
