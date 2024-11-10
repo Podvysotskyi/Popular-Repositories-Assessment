@@ -21,4 +21,4 @@ stop:
 	./vendor/bin/sail stop
 
 test: up
-	./vendor/bin/sail test
+	./vendor/bin/sail test --coverage
