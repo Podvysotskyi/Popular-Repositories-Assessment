@@ -8,7 +8,7 @@ init:
 	./vendor/bin/sail npm run build
 	./vendor/bin/sail stop
 
-up: up
+up:
 	./vendor/bin/sail up -d
 
 migrate: up
